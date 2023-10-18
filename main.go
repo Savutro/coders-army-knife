@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.io/savutro/golang/services/client"
-	"github.io/savutro/golang/services/server"
+	"gitlab.com/savutro/coders-army-knife/services/client"
+	"gitlab.com/savutro/coders-army-knife/services/server"
 )
 
 func main() {

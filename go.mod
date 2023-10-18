@@ -1,4 +1,4 @@
-module github.io/savutro/golang
+module gitlab.com/savutro/coders-army-knife
 
 go 1.21
 
