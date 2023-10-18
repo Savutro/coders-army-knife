@@ -20,11 +20,13 @@ func StartServer() {
 
 	for {
 		conn, err := listener.Accept()
+		fmt.Println("Waiting for a Client to connect...")
 		if err != nil {
 			fmt.Println("Error accepting connection:", err)
 			continue
 		}
 		go handleConnection(conn)
+		fmt.Println("Established a connection to a Client.")
 	}
 }
 

