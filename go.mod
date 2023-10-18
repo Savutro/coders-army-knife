@@ -1,6 +1,6 @@
-module magicKeys
+module github.io/savutro/golang
 
-go 1.20
+go 1.21
 
 require github.com/kindlyfire/go-keylogger v0.0.0-20180814110756-f2fda1034e3a
 

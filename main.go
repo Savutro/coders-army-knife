@@ -4,6 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+
+	"github.io/savutro/golang/services/client"
+	"github.io/savutro/golang/services/server"
 )
 
 func main() {
@@ -16,9 +19,9 @@ func main() {
 		text := scanner.Text()
 
 		if text == "c" {
-			startClient()
+			client.StartClient()
 		} else if text == "s" {
-			startServer()
+			server.StartServer()
 		} else if text == "e" {
 			break
 		} else {
