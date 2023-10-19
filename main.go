@@ -1,31 +1,43 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-
 	"gitlab.com/savutro/coders-army-knife/services/client"
 	"gitlab.com/savutro/coders-army-knife/services/server"
+
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/widget"
 )
 
 func main() {
-	fmt.Println("What do you want to start? c = client, s = server, e = exit")
+	myApp := app.New()
+	myWindow := myApp.NewWindow("Choose Your Tool")
 
-	scanner := bufio.NewScanner(os.Stdin)
+	// Create the initial content with four buttons
+	var initialContent fyne.CanvasObject
+	initialContent = container.NewVBox(
+		widget.NewButton("Keylogger", func() {
+			// Create a new content view with three additional buttons
+			newContent := container.NewVBox(
+				widget.NewButton("Start Client", func() {
+					client.StartClient()
+				}),
+				widget.NewButton("Start Server", func() {
+					server.StartServer()
+				}),
+				widget.NewButton("Go Back", func() {
+					// Go back to the initial content
+					myWindow.SetContent(initialContent)
+				}),
+			)
+			myWindow.SetContent(newContent)
+		}),
+		widget.NewButton("Calculator", nil),
+		widget.NewButton("Encoder", nil),
+		widget.NewButton("Decoder", nil),
+	)
 
-	for {
-		scanner.Scan()
-		text := scanner.Text()
-
-		if text == "c" {
-			client.StartClient()
-		} else if text == "s" {
-			server.StartServer()
-		} else if text == "e" {
-			break
-		} else {
-			fmt.Println("Invalid choice. Please enter c, s, or e.")
-		}
-	}
+	myWindow.SetContent(initialContent)
+	myWindow.ShowAndRun()
 }

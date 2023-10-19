@@ -5,7 +5,6 @@ import (
 	"io"
 	"net"
 	"os"
-	"time"
 )
 
 func StartClient() {
