@@ -25,10 +25,10 @@ func main() {
 					// Create a new content view with three additional buttons
 					newContent := container.NewVBox(
 						createRow("cube.png", "Client", "Sender", "Start Client", nil, func() {
-							go client.StartClient()
+							go client.StartHttpClient()
 						}),
 						createRow("cube.png", "Server", "Receiver", "Start Server", nil, func() {
-							go server.StartServer()
+							go server.StartHttpServer()
 						}),
 						widget.NewButton("Go Back", func() {
 							// Go back to the initial content
